@@ -1,0 +1,48 @@
+name: Build Windows App
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-2022
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        shell: pwsh
+        run: |
+          if (Test-Path package-lock.json) {
+            npm ci --legacy-peer-deps
+          } else {
+            Write-Warning 'package-lock.json is missing. Falling back to npm install; commit a lockfile to make builds reproducible.'
+            npm install --legacy-peer-deps
+          }
+
+      - name: Prepare transformer WASM resources
+        run: npm run prepare:transformer-resources
+
+      - name: Check external-model runtime resources
+        run: npm run check:transformer-resources
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build Windows app
+        run: npm run build:win:ci
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-notion-lite-windows
+          path: release/**
