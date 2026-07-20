@@ -1,0 +1,37 @@
+/* Shared fixed rail: only workspace-wide actions live in the viewport corner. */
+.workspace-floating-actions {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: none;
+}
+.workspace-floating-actions > button { pointer-events: auto; }
+.workspace-floating-actions .quick-add-current-shelf,
+.workspace-floating-actions .workspace-ai-fab {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+}
+.workspace-floating-actions .quick-add-current-shelf {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.workspace-floating-actions .quick-add-current-shelf > span { line-height: 1; }
+.workspace-floating-actions .quick-add-current-shelf > b { font: inherit; }
+@media (max-width: 700px) {
+  .workspace-floating-actions {
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    gap: 8px;
+  }
+  .workspace-floating-actions .quick-add-current-shelf { padding: 10px; }
+  .workspace-floating-actions .quick-add-current-shelf > b { display: none; }
+}
+.workspace-floating-actions .quick-add-current-shelf > span { display: inline; }

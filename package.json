@@ -1,0 +1,104 @@
+{
+  "name": "local-notion-lite",
+  "version": "2.43.26",
+  "private": true,
+  "description": "Offline-first Notion-like workspace for Windows shared folders.",
+  "main": "out/main/main.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "npm run check:styles && electron-vite build",
+    "dist:win": "npm run check:duckdb:win && npm run rebuild:native && npm run build && electron-builder --win --x64",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "init:vault": "tsx scripts/init-vault.ts",
+    "postinstall": "electron-builder install-app-deps",
+    "rebuild:native": "electron-rebuild -f -w better-sqlite3 && electron-rebuild -f -w @duckdb/node-bindings",
+    "build:win:ci": "npm run check:duckdb:win && npm run rebuild:native && npm run build && electron-builder --win portable --x64 --publish never",
+    "check:transformer-resources": "node scripts/check-transformer-resources.mjs",
+    "prepare:transformer-resources": "node scripts/prepare-transformer-resources.mjs",
+    "test": "tsx --test",
+    "test:watch": "tsx --test --watch",
+    "check:duckdb:win": "node scripts/check-duckdb-windows-packaging.mjs",
+    "check:styles": "node scripts/check-styles.mjs"
+  },
+  "dependencies": {
+    "@blocknote/core": "0.51.4",
+    "@blocknote/mantine": "0.51.4",
+    "@blocknote/react": "0.51.4",
+    "@blocknote/xl-multi-column": "0.51.4",
+    "@electron-toolkit/preload": "^3.0.1",
+    "@electron-toolkit/utils": "^3.0.0",
+    "@mantine/core": "8.3.11",
+    "@mantine/hooks": "8.3.11",
+    "better-sqlite3": "^11.8.1",
+    "sqlite-vec": "0.1.9",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "fs-extra": "^11.2.0",
+    "nanoid": "^5.0.9",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^3.24.1",
+    "@huggingface/transformers": "^4.2.0",
+    "@duckdb/node-api": "1.5.4-r.1",
+    "@observablehq/plot": "^0.6.17",
+    "arquero": "^8.0.3",
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^3.7.1",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^34.0.0",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "eslint": "^9.17.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11"
+  },
+  "build": {
+    "appId": "jp.local.notionlite",
+    "productName": "Local Notion Lite",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "extraResources": [
+      {
+        "from": "resources/wasm",
+        "to": "wasm",
+        "filter": [
+          "**/*.wasm",
+          "**/*.mjs",
+          "**/*.js"
+        ]
+      },
+      {
+        "from": "resources/ocr",
+        "to": "ocr",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "asarUnpack": [
+      "node_modules/@duckdb/**",
+      "node_modules/better-sqlite3/**"
+    ]
+  }
+}

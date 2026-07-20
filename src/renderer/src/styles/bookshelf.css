@@ -1,0 +1,408 @@
+/* Collection shelves / bookcase / sidebar shelf picker.
+   Both features use existing visible graph/home data only; no index query is introduced. */
+
+
+
+/* v657: an interactive personal bookcase. Shelves select; books open concrete workspace targets. */
+.work-home-collection{overflow:hidden}.work-home-collection__layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(245px,.65fr);gap:14px;padding:0 14px 12px}.work-home-bookcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;align-content:start;padding:8px;border-radius:18px;background:linear-gradient(155deg,#fcfaf5,#f4eee6);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 -12px 20px rgba(91,60,28,.04)}.work-home-bookshelf{position:relative;min-width:0;overflow:hidden;border:1px solid rgba(93,64,39,.22);border-radius:13px 13px 9px 9px;background:linear-gradient(90deg,#5b3622 0 4%,#d0a677 4% 8%,#f1d0a7 8% 92%,#8a5633 92% 96%,#4f2f1f 96%);box-shadow:0 11px 19px rgba(68,41,25,.14)}.work-home-bookshelf:after{content:"";position:absolute;left:5px;right:5px;bottom:0;height:12px;border-radius:3px 3px 8px 8px;background:linear-gradient(#7f4d2f,#4c2b1d);box-shadow:0 -2px 0 rgba(255,255,255,.18) inset;pointer-events:none}.work-home-bookshelf.is-active{outline:3px solid rgba(107,88,196,.22);outline-offset:2px}.work-home-bookshelf__label{position:relative;z-index:1;display:grid;grid-template-columns:15px minmax(0,1fr) auto;align-items:center;gap:6px;width:100%;border:0;border-bottom:1px solid rgba(93,64,39,.25);background:rgba(255,248,237,.65);padding:9px 10px;color:#4d3020;text-align:left;cursor:pointer}.work-home-bookshelf__label:hover{background:rgba(255,251,244,.92)}.work-home-bookshelf__label>span{color:#89603d;font-size:13px}.work-home-bookshelf__label b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}.work-home-bookshelf__label small{color:#80634e;font-size:10px}.work-home-bookshelf__label i{grid-column:1/-1;overflow:hidden;color:#8b7363;text-overflow:ellipsis;white-space:nowrap;font-size:10px;font-style:normal}.work-home-bookshelf__board{display:flex;align-items:end;gap:6px;min-height:132px;padding:12px 12px 18px;overflow-x:auto;overscroll-behavior-inline:contain;background:linear-gradient(180deg,rgba(96,52,27,.12),transparent 28%),rgba(255,247,234,.2);scrollbar-width:thin}.work-home-book{position:relative;display:grid;grid-template-rows:20px minmax(0,1fr);place-items:center;flex:0 0 clamp(46px,12%,64px);height:103px;min-width:46px;max-width:64px;overflow:hidden;border:0;border-radius:5px 6px 3px 3px;background:linear-gradient(90deg,rgba(255,255,255,.30),transparent 20%,rgba(0,0,0,.10)),#8069bc;padding:6px 5px 7px;color:#fff;box-shadow:inset 2px 0 rgba(255,255,255,.22),inset -2px 0 rgba(0,0,0,.12),0 2px 3px rgba(49,30,17,.18);cursor:pointer;transform-origin:bottom;transition:transform .14s ease,filter .14s ease,box-shadow .14s ease}.work-home-book:hover,.work-home-book:focus-visible{z-index:2;filter:brightness(1.08);transform:translateY(-9px) rotate(-1.2deg);box-shadow:inset 2px 0 rgba(255,255,255,.24),inset -2px 0 rgba(0,0,0,.12),0 11px 12px rgba(49,30,17,.24);outline:2px solid rgba(255,255,255,.9);outline-offset:2px}.work-home-book .book-icon{display:grid;place-items:center;width:20px;height:20px;border-radius:6px;background:rgba(255,255,255,.16);font-size:13px;line-height:1}.work-home-book .book-title{display:-webkit-box;align-self:stretch;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:3;border-radius:4px;background:rgba(255,255,255,.90);color:#273142;text-align:center;text-overflow:ellipsis;font-size:8.5px;font-weight:850;line-height:1.24;word-break:break-word;overflow-wrap:anywhere;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 1px 2px rgba(32,22,16,.14);padding:3px 2px;text-shadow:none}.work-home-book.spine-1{background-color:#659f81}.work-home-book.spine-2{background-color:#c88350}.work-home-book.spine-3{background-color:#568fb0}.work-home-book.spine-4{background-color:#b86782}.work-home-bookshelf__empty{align-self:center;color:rgba(79,48,30,.68);font-size:10px;line-height:1.45}.work-home-bookshelf__footer{display:flex;justify-content:flex-end;gap:6px;padding:7px 10px 15px}.work-home-bookshelf__footer button{border:1px solid rgba(103,67,41,.20);border-radius:7px;background:rgba(255,249,240,.92);padding:5px 8px;color:#5d3928;font-size:10px;font-weight:800;cursor:pointer}.work-home-bookshelf__footer button:hover{background:#fff}.work-home-bookshelf__footer button.danger{border-color:rgba(177,85,97,.28);color:#a14454}.work-home-bookshelf__footer button.danger:hover{background:#fff1f0}.work-home-collection__add{display:grid;align-content:start;gap:8px;padding:11px;border:1px dashed rgba(112,95,205,.33);border-radius:14px;background:rgba(248,248,255,.7)}.work-home-collection__add>b{color:#50438e;font-size:12px}.work-home-collection__add>small,.work-home-collection__add>p{margin:0;color:#8993a6;font-size:10px;line-height:1.45}.work-home-collection__add>div{display:grid;grid-template-columns:18px minmax(0,1fr) 88px 28px;align-items:center;gap:5px}.work-home-collection__add>div span{font-size:12px}.work-home-collection__add>div b{overflow:hidden;color:#536079;text-overflow:ellipsis;white-space:nowrap;font-size:10px}.work-home-collection__add select{min-width:0;border:1px solid #dce1ef;border-radius:7px;background:#fff;padding:5px;color:#61708a;font-size:10px}.work-home-collection__add button{height:26px;border:1px solid rgba(95,80,190,.26);border-radius:8px;background:#fff;color:#5546a4;font-size:12px;font-weight:800;cursor:pointer}@media(max-width:900px){.work-home-collection__layout{grid-template-columns:1fr}.work-home-collection__add>div{grid-template-columns:18px minmax(0,1fr) 100px 28px}}@media(max-width:560px){.work-home-collection__layout{padding:0 10px 10px}.work-home-bookcase{grid-template-columns:1fr;padding:7px}.work-home-collection__add>div{grid-template-columns:18px minmax(0,1fr) 82px 28px}}
+
+/* v659 bookshelf expansion */
+.work-home-collection__add>.work-home-shelf-search{display:grid;grid-template-columns:minmax(0,1fr);align-items:stretch;gap:8px;margin-top:10px;padding:11px 0 0;border-top:1px solid rgba(95,80,190,.16)}.work-home-shelf-search>header{display:block}.work-home-shelf-search>header>div{display:grid;grid-template-columns:minmax(0,1fr);gap:2px}.work-home-shelf-search>header b{color:#50438e;font-size:11px}.work-home-shelf-search>header small{color:#8993a6;font-size:10px;line-height:1.4}.work-home-shelf-search__input{display:grid;grid-template-columns:20px minmax(0,1fr);align-items:center;gap:3px;min-width:0;border:1px solid #dce1ef;border-radius:9px;background:#fff;padding:0 7px;color:#8a80af}.work-home-shelf-search__input:focus-within{border-color:rgba(92,75,185,.55);box-shadow:0 0 0 3px rgba(92,75,185,.1)}.work-home-shelf-search__input>span{display:grid;place-items:center;font-size:15px}.work-home-shelf-search__input input{width:100%;min-width:0;box-sizing:border-box;border:0;outline:0;background:transparent;padding:8px 0;color:#46516a;font-size:11px}.work-home-shelf-search__results{display:grid;grid-template-columns:minmax(0,1fr);gap:5px;max-height:290px;overflow:auto;padding:2px 2px 2px 0}.work-home-shelf-search__row{display:grid;grid-template-columns:20px minmax(0,1fr) minmax(78px,92px) 28px;align-items:center;gap:6px;min-width:0;border:1px solid rgba(220,225,239,.92);border-radius:9px;background:rgba(255,255,255,.82);padding:5px}.work-home-shelf-search__row:hover{border-color:rgba(111,94,194,.28);background:#fff}.work-home-shelf-search__row .item-icon{display:grid;place-items:center;font-size:13px}.work-home-shelf-search__row .item-copy{display:grid;min-width:0;gap:1px}.work-home-shelf-search__row .item-copy b{overflow:hidden;color:#536079;text-overflow:ellipsis;white-space:nowrap;font-size:10px}.work-home-shelf-search__row .item-copy small{overflow:hidden;color:#959db0;text-overflow:ellipsis;white-space:nowrap;font-size:9px}.work-home-shelf-search__row select{min-width:0;border:1px solid #dce1ef;border-radius:7px;background:#fff;padding:5px;color:#61708a;font-size:10px}.work-home-shelf-search__row button{height:28px;border:1px solid rgba(95,80,190,.26);border-radius:8px;background:#fff;color:#5546a4;font-size:13px;font-weight:800;cursor:pointer}.work-home-shelf-search__row button:hover{background:rgba(95,80,190,.08)}.work-home-shelf-search__hint,.work-home-shelf-search__empty{margin:0;border:1px dashed rgba(112,95,205,.2);border-radius:8px;background:rgba(255,255,255,.45);padding:8px;color:#8993a6;font-size:10px;line-height:1.45}.work-home-shelf-search__empty{color:#9a6670}@media(max-width:560px){.work-home-shelf-search__row{grid-template-columns:20px minmax(0,1fr) 76px 28px;gap:4px;padding:4px}.work-home-shelf-search__results{max-height:240px}.work-home-shelf-search__input input{font-size:10px}}.knowledge-map-shelf-menu{position:absolute;z-index:30;right:16px;top:64px;display:grid;grid-template-columns:auto auto;gap:6px;min-width:220px;padding:10px;border:1px solid rgba(96,74,51,.2);border-radius:11px;background:rgba(255,253,248,.96);box-shadow:0 12px 28px rgba(38,28,18,.16);font-size:11px}.knowledge-map-shelf-menu b,.knowledge-map-shelf-menu span{grid-column:1/-1}.knowledge-map-shelf-menu span{overflow:hidden;color:#756a61;text-overflow:ellipsis;white-space:nowrap}.knowledge-map-shelf-menu button{border:1px solid #e3d6c7;border-radius:7px;background:#fff;padding:6px 8px;color:#684933;font-weight:700;cursor:pointer}.knowledge-map-shelf-menu button:hover{background:#fff6ec}
+
+
+/* v664: Bookshelf confirmation dialog — rendered through Portal to document.body.
+   This rule intentionally lives in the imported app stylesheet. Earlier versions
+   accidentally placed it in unused styles.css, which made the Portal content
+   render as ordinary content at the bottom of the page. */
+.collection-shelf-dialog-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483646 !important;
+  display: grid !important;
+  place-items: center !important;
+  box-sizing: border-box !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  padding: 24px !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  background: rgba(15, 23, 42, .58) !important;
+  backdrop-filter: blur(8px) saturate(118%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(118%) !important;
+}
+.collection-shelf-dialog {
+  position: relative !important;
+  z-index: 2147483647 !important;
+  box-sizing: border-box !important;
+  width: min(440px, calc(100vw - 32px)) !important;
+  max-height: calc(100vh - 32px) !important;
+  display: grid !important;
+  gap: 14px !important;
+  overflow: auto !important;
+  padding: 22px !important;
+  border: 1px solid rgba(226, 232, 240, .82) !important;
+  border-radius: 22px !important;
+  background: linear-gradient(145deg, #fffdf8, #ffffff) !important;
+  box-shadow: 0 30px 90px rgba(15, 23, 42, .44) !important;
+  color: #0f172a !important;
+}
+.collection-shelf-dialog header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  color: #7c2d12 !important;
+  font-size: 11px !important;
+  font-weight: 850 !important;
+  letter-spacing: .08em !important;
+}
+.collection-shelf-dialog header button {
+  width: 30px !important;
+  height: 30px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  font-size: 20px !important;
+  cursor: pointer !important;
+}
+.collection-shelf-dialog h2 { margin: 0 !important; color: #172554 !important; font-size: 20px !important; }
+.collection-shelf-dialog p { margin: 0 !important; color: #475569 !important; line-height: 1.65 !important; }
+.collection-shelf-dialog label { display: grid !important; gap: 7px !important; color: #475569 !important; font-size: 12px !important; font-weight: 800 !important; }
+.collection-shelf-dialog input { width: 100% !important; box-sizing: border-box !important; border: 1px solid #cbd5e1 !important; border-radius: 12px !important; padding: 11px 12px !important; background: #ffffff !important; color: #0f172a !important; font: inherit !important; outline: none !important; }
+.collection-shelf-dialog input:focus { border-color: #a16207 !important; box-shadow: 0 0 0 3px rgba(234, 179, 8, .15) !important; }
+.collection-shelf-dialog footer { display: flex !important; justify-content: flex-end !important; gap: 8px !important; margin-top: 2px !important; }
+.collection-shelf-dialog footer button { border-radius: 11px !important; padding: 9px 13px !important; font-weight: 800 !important; cursor: pointer !important; }
+.collection-shelf-dialog footer .secondary { border: 1px solid #cbd5e1 !important; background: #ffffff !important; color: #334155 !important; }
+.collection-shelf-dialog footer .primary { border: 1px solid #854d0e !important; background: #a16207 !important; color: #ffffff !important; }
+.collection-shelf-dialog footer .danger { border: 1px solid #b91c1c !important; background: #dc2626 !important; color: #ffffff !important; }
+.collection-shelf-dialog footer button:disabled { opacity: .45 !important; cursor: not-allowed !important; }
+@media (max-width: 560px) {
+  .collection-shelf-dialog-backdrop { padding: 12px !important; }
+  .collection-shelf-dialog { width: min(440px, calc(100vw - 24px)) !important; padding: 18px !important; border-radius: 18px !important; }
+  .collection-shelf-dialog footer { flex-direction: column-reverse !important; }
+  .collection-shelf-dialog footer button { width: 100% !important; }
+}
+
+/* v667: keep the collection shelf area bounded. The home dashboard must not
+   grow indefinitely when users create many shelves; only the shelf grid scrolls. */
+.work-home-bookcase {
+  max-height: min(620px, 66vh);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+}
+.work-home-bookcase::-webkit-scrollbar { width: 10px; }
+.work-home-bookcase::-webkit-scrollbar-track {
+  margin: 8px 0;
+  border-radius: 999px;
+  background: rgba(120, 82, 48, .08);
+}
+.work-home-bookcase::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: rgba(114, 73, 41, .38);
+  background-clip: padding-box;
+}
+.work-home-bookcase::-webkit-scrollbar-thumb:hover {
+  background: rgba(114, 73, 41, .58);
+  background-clip: padding-box;
+}
+@media (max-width: 900px) {
+  .work-home-bookcase {
+    max-height: min(560px, 62vh);
+    padding-right: 8px;
+  }
+}
+@media (max-width: 560px) {
+  .work-home-bookcase {
+    max-height: min(500px, 58vh);
+    padding-right: 6px;
+  }
+}
+
+
+/* v668: bookshelf readability and bounded shelf scrolling.
+   Keep the shelf list bounded so the Home dashboard never grows endlessly. */
+.work-home-collection__layout {
+  align-items: start;
+  min-height: 0;
+}
+.work-home-bookcase {
+  grid-auto-rows: max-content;
+  min-height: 0;
+  height: clamp(300px, 58vh, 620px);
+  max-height: 620px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(111, 78, 48, .46) rgba(255,255,255,.46);
+}
+.work-home-bookcase::-webkit-scrollbar { width: 10px; }
+.work-home-bookcase::-webkit-scrollbar-track { background: rgba(255,255,255,.42); border-radius: 999px; }
+.work-home-bookcase::-webkit-scrollbar-thumb { background: rgba(111, 78, 48, .42); border: 2px solid rgba(255,255,255,.58); border-radius: 999px; }
+.work-home-bookcase::-webkit-scrollbar-thumb:hover { background: rgba(92, 59, 34, .62); }
+
+/* Book titles need a stable, high-contrast reading surface independent of spine colour. */
+.work-home-book .book-title {
+  box-sizing: border-box;
+  border: 1px solid rgba(15, 23, 42, .10);
+  background: rgba(255, 255, 255, .96);
+  color: #172033;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .005em;
+  line-height: 1.3;
+  text-shadow: none;
+}
+.work-home-book:hover .book-title,
+.work-home-book:focus-visible .book-title {
+  background: #ffffff;
+  color: #0f172a;
+}
+@media (max-width: 900px) {
+  .work-home-bookcase { height: clamp(280px, 54vh, 540px); max-height: 540px; }
+}
+@media (max-width: 560px) {
+  .work-home-bookcase { height: min(58vh, 500px); max-height: 500px; }
+}
+
+
+/* Sidebar shelf target picker.
+   The picker replaces the action pane instead of appending its rows beneath the
+   trigger, keeping the menu height stable even when many shelves exist. */
+.context-shelf-submenu__trigger {
+  position: relative;
+}
+.context-shelf-submenu__trigger > span:first-child { flex: 0 0 16px; }
+.context-shelf-submenu__chevron {
+  margin-left: auto;
+  color: #8a7b70;
+  font-size: 16px;
+  line-height: 1;
+}
+.context-shelf-submenu {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: rgba(255, 253, 248, .985);
+}
+.context-shelf-submenu__header {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  padding: 7px 8px 8px;
+  border-bottom: 1px solid rgba(120, 92, 67, .14);
+}
+.context-shelf-submenu__header > div { display: grid; gap: 1px; min-width: 0; }
+.context-shelf-submenu__header strong { overflow: hidden; color: #4b3a30; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.context-shelf-submenu__header small { color: #8a7b70; font-size: 10px; }
+.context-shelf-submenu__back {
+  display: grid !important;
+  place-items: center;
+  width: 28px !important;
+  min-width: 28px !important;
+  height: 28px;
+  min-height: 28px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  color: #685544 !important;
+  font-size: 20px !important;
+  line-height: 1;
+}
+.context-shelf-submenu__list {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 7px;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+.context-shelf-submenu__list > button {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  text-align: left;
+}
+.context-shelf-submenu__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.context-shelf-submenu__list em { color: #908378; font-size: 10px; font-style: normal; }
+.context-shelf-submenu__list::-webkit-scrollbar { width: 8px; }
+.context-shelf-submenu__list::-webkit-scrollbar-thumb { border: 2px solid transparent; border-radius: 999px; background: rgba(100, 116, 139, .32); background-clip: padding-box; }
+
+/* Sidebar context menus: fixed headers with a bounded, independently scrollable action list.
+   This keeps long template and bookshelf lists usable on short displays. */
+.context-menu-v489,
+.db-sidebar-context-menu-v519 {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: visible;
+  overscroll-behavior: contain;
+}
+.context-menu-v489 .context-menu__scroll,
+.db-sidebar-context-menu-v519 .db-sidebar-context-menu__scroll {
+  min-height: 0;
+  max-height: calc(100vh - 86px);
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  position: relative;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+.context-menu-v489 .context-menu__scroll {
+  padding: 0 1px 2px;
+}
+.context-menu-v489 .context-menu__scroll:focus-visible,
+.db-sidebar-context-menu-v519 .db-sidebar-context-menu__scroll:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, .42);
+  outline-offset: -2px;
+}
+.db-sidebar-context-menu-v519 {
+  position: fixed;
+  z-index: 1100;
+  width: min(284px, calc(100vw - 24px));
+  padding: 7px;
+  border: 1px solid rgba(148, 163, 184, .24);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .98);
+  box-shadow: 0 20px 58px rgba(15, 23, 42, .18);
+  backdrop-filter: blur(10px);
+}
+.db-sidebar-context-title-v519 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 7px 8px 9px;
+}
+.db-sidebar-context-title-v519 > span {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: rgba(99, 102, 241, .09);
+  font-size: 16px;
+}
+.db-sidebar-context-title-v519 strong {
+  min-width: 0;
+  overflow: hidden;
+  color: #243042;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.db-sidebar-context-menu-v519 button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 32px;
+  border: 0;
+  border-radius: 9px;
+  padding: 7px 9px;
+  color: #334155;
+  background: transparent;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+.db-sidebar-context-menu-v519 button:hover {
+  color: #4f46e5;
+  background: rgba(99, 102, 241, .09);
+}
+.db-sidebar-context-separator-v519 {
+  height: 1px;
+  margin: 6px 4px;
+  background: rgba(148, 163, 184, .17);
+}
+@media (max-width: 640px) {
+  .db-sidebar-context-menu-v519 { width: min(284px, calc(100vw - 20px)); }
+}
+
+
+/* Measured sidebar menus. The action pane owns overflow so long shelf/template
+   lists remain scrollable even when the parent uses a fixed max-height. */
+.context-menu-v489 .context-menu__scroll::-webkit-scrollbar,
+.db-sidebar-context-menu-v519 .db-sidebar-context-menu__scroll::-webkit-scrollbar { width: 8px; }
+.context-menu-v489 .context-menu__scroll::-webkit-scrollbar-thumb,
+.db-sidebar-context-menu-v519 .db-sidebar-context-menu__scroll::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, .32); border: 2px solid transparent; border-radius: 999px; background-clip: padding-box; }
+
+
+
+/* Explicit destination chooser for the page-level shelf action. */
+.collection-shelf-picker-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, .44);
+  backdrop-filter: blur(5px);
+}
+.collection-shelf-picker-dialog {
+  width: min(480px, calc(100vw - 32px));
+  max-height: min(640px, calc(100vh - 32px));
+  display: grid;
+  gap: 14px;
+  overflow: hidden;
+  padding: 20px;
+  border: 1px solid rgba(226, 232, 240, .9);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #fffdf9, #ffffff);
+  box-shadow: 0 28px 80px rgba(15, 23, 42, .34);
+}
+.collection-shelf-picker-dialog > header,
+.collection-shelf-picker-dialog > footer { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.collection-shelf-picker-dialog__eyebrow { color:#8b5e34; font-size:11px; font-weight:850; letter-spacing:.08em; }
+.collection-shelf-picker-dialog > header button { width:30px; height:30px; border:0; border-radius:999px; background:#f1f5f9; color:#475569; font-size:20px; cursor:pointer; }
+.collection-shelf-picker-dialog__resource { display:grid; grid-template-columns:42px minmax(0,1fr); align-items:center; gap:10px; padding:12px; border:1px solid rgba(148, 113, 74, .16); border-radius:14px; background:rgba(255,248,237,.72); }
+.collection-shelf-picker-dialog__resource > span { display:grid; place-items:center; width:42px; height:42px; border-radius:12px; background:#fff; font-size:21px; box-shadow:0 2px 8px rgba(49,31,17,.08); }
+.collection-shelf-picker-dialog h2 { margin:0; color:#1f2937; font-size:16px; }
+.collection-shelf-picker-dialog__resource p { overflow:hidden; margin:4px 0 0; color:#64748b; text-overflow:ellipsis; white-space:nowrap; font-size:12px; }
+.collection-shelf-picker-dialog__list { display:grid; gap:7px; min-height:0; max-height:360px; overflow:auto; padding-right:3px; }
+.collection-shelf-picker-dialog__list > button { display:grid; grid-template-columns:32px minmax(0,1fr) auto; align-items:center; gap:10px; width:100%; border:1px solid rgba(148,163,184,.22); border-radius:13px; background:#fff; padding:10px; color:#334155; text-align:left; cursor:pointer; }
+.collection-shelf-picker-dialog__list > button:hover { border-color:rgba(137,108,66,.36); background:#fffaf3; }
+.collection-shelf-picker-dialog__shelf-icon { display:grid; place-items:center; width:32px; height:32px; border-radius:10px; background:rgba(255,244,226,.9); }
+.collection-shelf-picker-dialog__shelf-copy { display:grid; min-width:0; gap:2px; }
+.collection-shelf-picker-dialog__shelf-copy b { overflow:hidden; color:#344054; text-overflow:ellipsis; white-space:nowrap; font-size:13px; }
+.collection-shelf-picker-dialog__shelf-copy small { color:#8a6f59; font-size:11px; }
+.collection-shelf-picker-dialog__chevron { color:#a06b3d; font-size:22px; line-height:1; }
+.collection-shelf-picker-dialog__empty { display:grid; gap:8px; padding:18px; border:1px dashed rgba(148,113,74,.3); border-radius:14px; color:#64748b; font-size:12px; }
+.collection-shelf-picker-dialog__empty b { color:#475569; }
+.collection-shelf-picker-dialog__empty button { justify-self:start; border:1px solid rgba(151, 108, 60, .35); border-radius:10px; background:#fff7e8; padding:8px 10px; color:#825522; font-weight:800; cursor:pointer; }
+.collection-shelf-picker-dialog > footer { color:#94a3b8; font-size:11px; }
+.collection-shelf-picker-dialog > footer .secondary { border:1px solid #cbd5e1; border-radius:10px; background:#fff; padding:8px 11px; color:#475569; font-weight:750; cursor:pointer; }
+@media (max-width: 560px) {
+  .collection-shelf-picker-backdrop { padding:12px; }
+  .collection-shelf-picker-dialog { width:calc(100vw - 24px); max-height:calc(100vh - 24px); padding:16px; border-radius:16px; }
+  .collection-shelf-picker-dialog__list { max-height: min(320px, 48vh); }
+}

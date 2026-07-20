@@ -1,0 +1,12 @@
+import type { WebAsset, WebPlugin, WebProject, WebUserTemplate } from "./types";
+export const BUILTIN_PLUGINS:WebPlugin[]=[
+ {id:"plugin:accordion",name:"Accordion",enabled:false,css:".ln-accordion summary{cursor:pointer;font-weight:700;padding:12px 0}",html:'<details class="ln-accordion"><summary>質問</summary><p>回答を入力してください。</p></details>'},
+ {id:"plugin:tabs",name:"Tabs",enabled:false,css:".ln-tabs{display:flex;gap:8px;flex-wrap:wrap}.ln-tabs button{padding:8px 12px}",html:'<div class="ln-tabs"><button>タブ1</button><button>タブ2</button></div>'},
+ {id:"plugin:progress",name:"Progress",enabled:false,css:".ln-progress{width:100%;height:10px}",html:'<progress class="ln-progress" value="65" max="100">65%</progress>'},
+];
+export function autoLayoutCss(css:string){const patch=`\n/* V781 Smart Auto Layout */\n:where(section,header,main,footer,article){min-width:0}\n:where(img,video,svg,canvas){max-width:100%;height:auto}\n:where(.cards,.grid,[data-auto-grid]){display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:var(--wb-space)}\n@media(max-width:700px){:where(section,header,main,footer){padding-left:16px;padding-right:16px}}\n`;return css.includes("V781 Smart Auto Layout")?css:`${css}${patch}`}
+export function motionCss(css:string,type:"reveal"|"float"|"pulse"){const blocks={reveal:"@keyframes lnReveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}} .ln-reveal{animation:lnReveal .45s ease both}",float:"@keyframes lnFloat{50%{transform:translateY(-6px)}} .ln-float{animation:lnFloat 3s ease-in-out infinite}",pulse:"@keyframes lnPulse{50%{transform:scale(1.03)}} .ln-pulse{animation:lnPulse 1.8s ease-in-out infinite}"};return css.includes(blocks[type])?css:`${css}\n${blocks[type]}\n`}
+export function createUserTemplate(project:WebProject,name:string):WebUserTemplate{return{id:`tpl:${Date.now()}`,name,html:project.html,css:project.css,javascript:project.javascript,createdAt:Date.now()}}
+export function applyUserTemplate(project:WebProject,t:WebUserTemplate):Partial<WebProject>{return{html:t.html,css:t.css,javascript:t.javascript}}
+export function optimizeAsset(asset:WebAsset):WebAsset{return asset.type.startsWith("image/")?{...asset,name:asset.name.replace(/\.(png|jpe?g)$/i,".webp")} : asset}
+export function pluginRuntime(project:WebProject){return(project.plugins??[]).filter(p=>p.enabled).reduce((acc,p)=>({html:acc.html+(p.html?`\n${p.html}`:""),css:acc.css+(p.css?`\n${p.css}`:""),javascript:acc.javascript+(p.javascript?`\n${p.javascript}`:"")}),{html:"",css:"",javascript:""})}

@@ -1,0 +1,159 @@
+/* database-performance.css: extracted from legacy-core.css; ordering is defined in app.css. */
+/* v602: Notion-like table affordances: per-column menu and view-aware footer summaries. */
+.fast-head-wrap { position: relative; display: flex; align-items: center; min-width: 0; }
+.fast-head-wrap .fast-head-button { min-width: 0; flex: 1; }
+.fast-column-menu-trigger { opacity: 0; width: 22px; height: 22px; border: 0; border-radius: 6px; background: transparent; color: #64748b; cursor: pointer; font-size: 17px; line-height: 1; }
+.fast-db-table th:hover .fast-column-menu-trigger, .fast-column-menu-trigger:focus { opacity: 1; background: #eaf2ff; color: #2563eb; }
+.fast-column-menu { position: fixed; z-index: 10050; display: grid; gap: 8px; width: 208px; padding: 10px; border: 1px solid rgba(15,23,42,.12); border-radius: 10px; background: rgba(255,255,255,.99); box-shadow: 0 14px 34px rgba(15,23,42,.16); }
+.fast-column-menu strong { overflow: hidden; color: #0f172a; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.fast-column-menu button { border: 0; border-radius: 7px; background: #f1f5f9; padding: 7px 8px; color: #334155; cursor: pointer; text-align: left; }
+.fast-column-menu button:hover { background: #e7f0ff; color: #1d4ed8; }
+.fast-column-menu label { display: grid; gap: 5px; color: #64748b; font-size: 11px; font-weight: 600; }
+.fast-column-menu select { min-width: 0; border: 1px solid rgba(15,23,42,.14); border-radius: 7px; background: white; padding: 6px 7px; color: #334155; }
+.fast-db-table tfoot { position: sticky; bottom: 0; z-index: 4; background: rgba(248,250,252,.98); box-shadow: 0 -1px 0 rgba(15,23,42,.08); }
+.fast-db-table tfoot td { height: 38px; padding: 5px 10px; border-right: 1px solid rgba(15,23,42,.045); background: rgba(248,250,252,.98); color: #64748b; font-size: 12px; }
+.fast-footer-label { color: #475569 !important; font-weight: 700; white-space: nowrap; }
+.fast-footer-cell button { width: 100%; overflow: hidden; border: 0; border-radius: 6px; background: transparent; color: #64748b; cursor: pointer; font: inherit; text-align: left; text-overflow: ellipsis; white-space: nowrap; }
+.fast-footer-cell button:hover, .fast-footer-cell button.is-active { background: #eef6ff; color: #1d4ed8; }
+
+/* v603: recoverable local column visibility controls. */
+.db-property-visibility-card-v603 { display: grid; gap: 10px; }
+.db-property-visibility-summary-v603 { display: flex; flex-wrap: wrap; gap: 8px; color: #64748b; font-size: 12px; }
+.db-property-visibility-summary-v603 span { padding: 4px 8px; border-radius: 999px; background: #f1f5f9; }
+.db-property-visibility-list-v603 { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
+.db-property-visibility-list-v603 label { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px; min-height: 36px; padding: 7px 9px; border: 1px solid rgba(148,163,184,.28); border-radius: 9px; background: #fff; color: #334155; cursor: pointer; }
+.db-property-visibility-list-v603 label:hover { border-color: #93c5fd; background: #f8fbff; }
+.db-property-visibility-list-v603 label.is-hidden { color: #94a3b8; background: #fafafa; }
+.db-property-visibility-list-v603 input { margin: 0; accent-color: #2563eb; }
+.db-property-visibility-list-v603 span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 700; }
+.db-property-visibility-list-v603 small { color: #94a3b8; font-size: 10px; }
+.db-property-visibility-help-v603 { color: #64748b; font-size: 11px; }
+.fast-column-menu button:disabled { cursor: not-allowed; opacity: .55; }
+
+/* v606: Notion-like database sub-items */
+.db-subitem-row-v606 td{background:linear-gradient(90deg,#fafaff,#fff)}
+.db-subitem-row-v606 .row-index-pill{color:#7258c9;background:#f0ecff}
+/* v609: hierarchy controls must never shift the fixed row-number column. */
+.db-subitem-structure-header,.db-subitem-structure-cell{width:86px;min-width:86px;text-align:left!important}
+.db-subitem-structure-header{color:#94a3b8!important;font-weight:700}
+.db-subitem-structure-cell{padding:0 8px!important}
+.db-subitem-structure{display:flex;align-items:center;min-height:28px;gap:4px;white-space:nowrap}
+.db-subitem-branch-v609,.db-subitem-structure-spacer-v609{display:inline-grid;place-items:center;width:18px;min-width:18px;color:#8a79cf;font-weight:700}
+.fast-row-number .row-index-pill{display:inline-flex;align-items:center;justify-content:center;min-width:28px;margin-left:0!important}
+
+/* v608: sub-item folding is intentionally local to the current device. */
+.db-subitem-toggle-v608{border:0;background:transparent;color:#6d5bb3;cursor:pointer;padding:0 2px;font:inherit;line-height:1}
+.db-subitem-toggle-v608:hover{color:#423380;transform:translateY(-1px)}
+.db-subitem-progress-v608{display:inline-block;margin-left:4px;padding:1px 4px;border-radius:999px;background:#ece9fb;color:#6652b1;font-size:10px;font-weight:700;vertical-align:middle}
+.db-subitem-row-v606 .db-subitem-progress-v608{background:#f2efff}
+
+
+/* v612: performance-safe leading-column pinning. Only the first three visible properties may be sticky,
+   so horizontal scroll does not create an unbounded stack of painted cells in large databases. */
+.fast-table-scroll .fast-select-cell { position: sticky; left: 0; z-index: 12; background: #fff; }
+.fast-table-scroll .fast-row-number { position: sticky; left: 42px; z-index: 11; background: #fff; }
+.fast-table-scroll .db-subitem-structure-cell { position: sticky; left: 96px; z-index: 10; background: #fff; }
+.fast-table-scroll thead .fast-select-cell { z-index: 22; background: rgba(248,250,252,.98); }
+.fast-table-scroll thead .fast-row-number { z-index: 21; background: rgba(248,250,252,.98); }
+.fast-table-scroll thead .db-subitem-structure-header { position: sticky; left: 96px; z-index: 20; background: rgba(248,250,252,.98); }
+.fast-pinned-property-head { position: sticky; z-index: 19; background: rgba(248,250,252,.98); box-shadow: 1px 0 0 rgba(15,23,42,.07); }
+.fast-pinned-property-cell { position: sticky; z-index: 8; background: #fff !important; box-shadow: 1px 0 0 rgba(15,23,42,.06); }
+.fast-db-table tr:hover .fast-pinned-property-cell { background: #f8fbff !important; }
+.fast-db-table tr.selected-row .fast-pinned-property-cell { background: #eef6ff !important; }
+.fast-db-table tr:hover .fast-select-cell,.fast-db-table tr:hover .fast-row-number,.fast-db-table tr:hover .db-subitem-structure-cell { background: #f8fbff; }
+.fast-db-table tr.selected-row .fast-select-cell,.fast-db-table tr.selected-row .fast-row-number,.fast-db-table tr.selected-row .db-subitem-structure-cell { background: #eef6ff; }
+.fast-db-table tfoot .fast-footer-label { position: sticky; left: 0; z-index: 18; background: rgba(248,250,252,.98) !important; }
+.fast-pinned-property-footer { position: sticky; z-index: 17; background: rgba(248,250,252,.98) !important; box-shadow: 1px 0 0 rgba(15,23,42,.07); }
+
+/* v614: group rows participate in the existing virtual list at one row height. */
+.db-table-group-row-v614 td { height: 48px; padding: 0 !important; background: #f7f9fc; border-top: 1px solid #dbe4f0; border-bottom: 1px solid #e6edf5; }
+.db-table-group-toggle-v614 { width: 100%; min-height: 47px; display: flex; align-items: center; gap: 9px; padding: 0 14px; color: #25364f; background: transparent; border: 0; text-align: left; cursor: pointer; }
+.db-table-group-toggle-v614:hover { background: #eef4fb; }
+.db-table-group-toggle-v614 > span { width: 14px; color: #61738f; }
+.db-table-group-toggle-v614 strong { font-size: 12px; font-weight: 750; }
+.db-table-group-toggle-v614 small { margin-left: auto; color: #6d7f98; font-size: 11px; }
+.db-view-config-grid-v130 label > small { display: block; margin-top: 5px; color: #718096; font-size: 11px; line-height: 1.45; }
+
+.density-compact .db-table-group-row-v614 td { height: 38px; }
+.density-compact .db-table-group-toggle-v614 { min-height: 37px; }
+
+/* v618: task dependency warnings stay lightweight; no SVG overlay or per-frame layout work. */
+.db-gantt-row-v127.has-dependency-warning .db-gantt-title-v127 small{color:#b45309;font-weight:700}
+.db-gantt-bar-v127.has-dependency-warning{outline:2px solid rgba(217,119,6,.55);outline-offset:1px}
+
+/* v619: explicit row-level database buttons. No background automation. */
+.db-row-button-v619 { width: 100%; min-height: 30px; border: 1px solid rgba(37,99,235,.22); border-radius: 9px; background: #eff6ff; color: #1d4ed8; font-weight: 650; cursor: pointer; transition: background .14s ease, border-color .14s ease, transform .14s ease; }
+.db-row-button-v619:hover:not(:disabled) { background: #dbeafe; border-color: rgba(37,99,235,.38); }
+.db-row-button-v619:active:not(:disabled) { transform: translateY(1px); }
+.db-row-button-v619:disabled { opacity: .52; cursor: not-allowed; }
+.button-action-editor-v619 { grid-template-columns: 1fr; }
+
+
+.db-virtual-scroll-status-v716 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  background: rgba(248, 250, 252, 0.86);
+  color: #475569;
+  font-size: 12px;
+}
+.db-virtual-scroll-status-v716 span {
+  color: #94a3b8;
+}
+
+/* v728: DB virtual table stability. Keep cell content inside the fixed virtual row height. */
+.density-comfortable .fast-db-table td { height: 52px; max-height: 52px; }
+.density-compact .fast-db-table td { height: 42px; max-height: 42px; }
+.fast-db-table td { position: relative; overflow: hidden; }
+.fast-db-table .multi-select-cell-v123 {
+  max-height: 32px;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.density-compact .fast-db-table .multi-select-cell-v123 { max-height: 28px; }
+.fast-db-table .db-contact-input-wrap-v554 { min-height: 0; }
+.fast-db-table .db-contact-error-v554 {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+.fast-db-table .modern-cell-input,
+.fast-db-table .select-chip,
+.fast-db-table .relation-cell-v124 > button {
+  min-height: 30px;
+  max-height: 34px;
+}
+.density-compact .fast-db-table .modern-cell-input,
+.density-compact .fast-db-table .select-chip,
+.density-compact .fast-db-table .relation-cell-v124 > button {
+  min-height: 28px;
+  max-height: 30px;
+}
+
+/* v728: Relation picker is portaled to the viewport, so virtual rows never grow or clip it. */
+.relation-popover-portal-v728 {
+  position: fixed !important;
+  display: grid !important;
+  gap: 4px;
+  width: min(460px, calc(100vw - 24px));
+  max-height: min(420px, calc(100vh - 24px));
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+}
+.relation-popover-portal-v728 .relation-candidates-v124 { max-height: 230px; overflow: auto; }
+.db-server-subitem-note-v728 {
+  display: block;
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 12px;
+}
+.db-server-toggle-v133 input:disabled + * { opacity: .55; }

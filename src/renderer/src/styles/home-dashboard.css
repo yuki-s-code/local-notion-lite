@@ -1,0 +1,104 @@
+/* home-dashboard.css: extracted from legacy-core.css; ordering is defined in app.css. */
+/* v562: modern work home — turns the existing dashboard into a focused daily workspace. */
+.work-home-v562 {
+  min-height: 100%;
+  padding: clamp(22px, 3.8vw, 54px);
+  color: #172033;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(215, 228, 255, .82), transparent 30%),
+    radial-gradient(circle at 100% 3%, rgba(237, 228, 255, .68), transparent 28%),
+    linear-gradient(145deg, #f8fafc 0%, #ffffff 52%, #faf9ff 100%);
+}
+.work-home-hero-v562 {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22px;
+  padding: clamp(24px, 3vw, 38px);
+  border: 1px solid rgba(148, 163, 184, .24);
+  border-radius: 30px;
+  background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(248,250,252,.88));
+  box-shadow: 0 22px 60px rgba(15, 23, 42, .09);
+  backdrop-filter: blur(18px);
+}
+.work-home-kicker-v562 { display: inline-flex; align-items: center; gap: 7px; color: #576a92; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
+.work-home-kicker-v562::before { content: ''; width: 24px; height: 2px; border-radius: 9px; background: linear-gradient(90deg, #5371e9, #a855f7); }
+.work-home-title-v562 h1 { margin: 8px 0 8px; font-size: clamp(30px, 4vw, 46px); letter-spacing: -.06em; line-height: 1.05; color: #101827; }
+.work-home-title-v562 p { max-width: 640px; margin: 0; color: #667085; line-height: 1.7; font-size: 14px; }
+.work-home-hero-actions-v562 { display: flex; gap: 10px; flex-wrap: wrap; }
+.work-home-hero-actions-v562 button { min-height: 42px; padding: 0 15px; border: 1px solid rgba(148,163,184,.28); border-radius: 14px; background: rgba(255,255,255,.85); color: #334155; font-weight: 720; box-shadow: 0 5px 18px rgba(15,23,42,.045); transition: transform .16s ease, box-shadow .16s ease, background .16s ease; }
+.work-home-hero-actions-v562 button:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(15,23,42,.12); }
+.work-home-hero-actions-v562 button.primary { border-color: #263fba; background: linear-gradient(135deg, #3047b9, #6656df); color: #fff; }
+.work-home-overview-v562 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0 18px; }
+.work-home-overview-card-v562 { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 11px; min-height: 88px; padding: 14px; border: 1px solid rgba(148,163,184,.17); border-radius: 20px; text-align: left; background: rgba(255,255,255,.77); box-shadow: 0 10px 30px rgba(15,23,42,.045); transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease; }
+.work-home-overview-card-v562:hover { transform: translateY(-2px); border-color: rgba(94, 105, 180, .36); box-shadow: 0 16px 33px rgba(15,23,42,.1); }
+.work-home-overview-icon-v562 { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 14px; background: #eff4ff; font-size: 18px; }
+.work-home-overview-card-v562.inbox .work-home-overview-icon-v562 { background: #eefcf6; }
+.work-home-overview-card-v562.alert .work-home-overview-icon-v562 { background: #fff4eb; }
+.work-home-overview-card-v562.file .work-home-overview-icon-v562 { background: #f7f1ff; }
+.work-home-overview-card-v562 b { display: block; color: #101828; font-size: 22px; letter-spacing: -.04em; line-height: 1; }
+.work-home-overview-card-v562 small { display: block; margin-top: 5px; color: #667085; font-size: 11px; }
+.work-home-overview-card-v562 i { color: #9aa4b6; font-size: 24px; font-style: normal; }
+.work-home-layout-v562 { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(290px, .85fr); gap: 16px; align-items: start; }
+.work-home-main-v562, .work-home-side-v562 { display: grid; gap: 16px; }
+.work-home-card-v562 { overflow: hidden; border: 1px solid rgba(148,163,184,.17); border-radius: 24px; background: rgba(255,255,255,.82); box-shadow: 0 14px 42px rgba(15,23,42,.055); }
+.work-home-card-head-v562 { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 19px 20px 15px; }
+.work-home-card-head-v562 > div { display: flex; align-items: center; gap: 10px; }
+.work-home-section-icon-v562 { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 10px; background: #edf2ff; color: #4257c4; font-size: 15px; }
+.work-home-card-head-v562 h2 { margin: 0; color: #172033; font-size: 15px; letter-spacing: -.025em; }
+.work-home-card-head-v562 p { margin: 2px 0 0; color: #8a94a6; font-size: 11px; }
+.text-action-v562 { border: 0; background: transparent; color: #5267ce; font-weight: 720; font-size: 12px; }
+.text-action-v562:hover { color: #263fba; text-decoration: underline; }
+.work-home-attention-grid-v562 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; padding: 0 20px 16px; }
+.work-home-attention-grid-v562 button { min-height: 108px; padding: 14px; border: 1px solid rgba(148,163,184,.16); border-radius: 17px; background: linear-gradient(145deg, #fbfcff, #f7f9ff); text-align: left; transition: transform .16s ease, border-color .16s ease; }
+.work-home-attention-grid-v562 button:hover { transform: translateY(-2px); border-color: rgba(99,102,241,.34); }
+.work-home-attention-grid-v562 b { display: block; color: #28375d; font-size: 26px; letter-spacing: -.06em; line-height: 1; }
+.work-home-attention-grid-v562 span { display: block; margin-top: 8px; color: #364152; font-weight: 760; font-size: 12px; }
+.work-home-attention-grid-v562 small { display: block; margin-top: 5px; color: #8a94a6; font-size: 10px; line-height: 1.45; }
+.work-home-attention-grid-v562 button.danger { background: linear-gradient(145deg, #fff7f6, #fff1ef); border-color: rgba(239,68,68,.2); }
+.work-home-attention-grid-v562 button.danger b { color: #c83434; }
+.work-home-attention-grid-v562 button.today { background: linear-gradient(145deg, #fffaf0, #fff5e5); border-color: rgba(245,158,11,.24); }
+.work-home-attention-grid-v562 button.today b { color: #bc7411; }
+.work-home-task-list-v562 { display: grid; border-top: 1px solid rgba(148,163,184,.13); }
+.work-home-task-list-v562 button { display: grid; grid-template-columns: 22px minmax(0,1fr) auto; gap: 9px; align-items: center; padding: 11px 20px; border: 0; border-bottom: 1px solid rgba(148,163,184,.09); text-align: left; background: transparent; }
+.work-home-task-list-v562 button:hover { background: rgba(241,245,249,.72); }
+.work-home-task-list-v562 span { color: #77849a; }
+.work-home-task-list-v562 span.late { color: #d04444; }
+.work-home-task-list-v562 b { overflow: hidden; color: #364152; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+.work-home-task-list-v562 small { color: #8a94a6; font-size: 10px; }
+.work-home-recent-grid-v562 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid rgba(148,163,184,.13); }
+.work-home-recent-grid-v562 > div + div { border-left: 1px solid rgba(148,163,184,.13); }
+.work-home-recent-grid-v562 h3 { margin: 0; padding: 14px 16px 8px; color: #718096; font-size: 11px; letter-spacing: .04em; }
+.work-home-recent-item-v562 { display: grid; grid-template-columns: 27px minmax(0,1fr) auto; gap: 8px; align-items: center; width: 100%; padding: 10px 16px; border: 0; background: transparent; text-align: left; }
+.work-home-recent-item-v562:hover { background: rgba(241,245,249,.72); }
+.work-home-recent-item-v562 > span { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 9px; background: #f2f5f9; font-size: 14px; }
+.work-home-recent-item-v562.database > span { background: #f0f2ff; color: #4656c6; }
+.work-home-recent-item-v562 b { overflow: hidden; color: #354052; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+.work-home-recent-item-v562 small { color: #8a94a6; font-size: 10px; }
+.work-home-side-v562 .work-home-card-v562 { background: rgba(255,255,255,.86); }
+.work-home-resume-list-v562 { display: grid; padding: 0 10px 12px; }
+.work-home-resume-list-v562 button { display: grid; grid-template-columns: 28px minmax(0,1fr) 18px; gap: 9px; align-items: center; width: 100%; min-height: 40px; padding: 7px 10px; border: 0; border-radius: 12px; background: transparent; text-align: left; }
+.work-home-resume-list-v562 button:hover { background: #f4f6fb; }
+.work-home-resume-list-v562 span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; background: #f1f4f9; font-size: 13px; }
+.work-home-resume-list-v562 b { overflow: hidden; color: #364152; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+.work-home-resume-list-v562 i { color: #5968c8; font-style: normal; font-size: 14px; }
+.work-home-shortcuts-v562 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 0 14px 14px; }
+.work-home-shortcuts-v562 button { display: grid; grid-template-columns: 24px minmax(0,1fr); grid-template-rows: auto auto; gap: 2px 7px; min-height: 58px; padding: 9px; border: 1px solid rgba(148,163,184,.15); border-radius: 13px; background: #fcfdff; text-align: left; }
+.work-home-shortcuts-v562 button:hover { border-color: rgba(99,102,241,.34); background: #f7f8ff; }
+.work-home-shortcuts-v562 span { grid-row: span 2; font-size: 15px; }
+.work-home-shortcuts-v562 b { overflow: hidden; color: #364152; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
+.work-home-shortcuts-v562 small { color: #8a94a6; font-size: 10px; }
+.work-home-journal-v562 { padding-bottom: 9px; }
+.work-home-journal-item-v562 { display: grid; gap: 3px; width: calc(100% - 24px); margin: 0 12px 7px; padding: 10px 12px; border: 0; border-radius: 12px; background: #f8fafc; text-align: left; }
+.work-home-journal-item-v562:hover { background: #f0f4ff; }
+.work-home-journal-item-v562 b { color: #3c4a67; font-size: 12px; }
+.work-home-journal-item-v562 small { overflow: hidden; color: #8a94a6; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; }
+.work-home-empty-v562 { margin: 0; padding: 15px 20px 19px; color: #98a2b3; font-size: 12px; }
+.work-home-empty-action-v562 { width: calc(100% - 24px); margin: 0 12px 9px; min-height: 42px; border: 1px dashed rgba(99,102,241,.35); border-radius: 12px; background: #fafbff; color: #5363c4; font-weight: 720; }
+.work-home-footnote-v562 { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 0 3px; color: #98a2b3; font-size: 11px; }
+.work-home-footnote-v562 span + span::before { content: '•'; margin-right: 12px; color: #c4cad5; }
+.work-home-footnote-v562 button { margin-left: auto; border: 0; border-radius: 10px; background: #fff2f2; color: #b83b3b; font-size: 11px; font-weight: 720; padding: 7px 9px; }
+@media (max-width: 1120px) { .work-home-layout-v562 { grid-template-columns: 1fr; } .work-home-side-v562 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .work-home-side-v562 .work-home-journal-v562 { grid-column: span 2; } }
+@media (max-width: 820px) { .work-home-v562 { padding: 18px; } .work-home-hero-v562 { align-items: flex-start; flex-direction: column; border-radius: 24px; } .work-home-overview-v562 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .work-home-side-v562 { grid-template-columns: 1fr; } .work-home-side-v562 .work-home-journal-v562 { grid-column: auto; } }
+@media (max-width: 560px) { .work-home-overview-v562, .work-home-attention-grid-v562, .work-home-recent-grid-v562, .work-home-shortcuts-v562 { grid-template-columns: 1fr; } .work-home-recent-grid-v562 > div + div { border-left: 0; border-top: 1px solid rgba(148,163,184,.13); } .work-home-hero-actions-v562 { width: 100%; } .work-home-hero-actions-v562 button { flex: 1; } .work-home-footnote-v562 { flex-wrap: wrap; } .work-home-footnote-v562 button { width: 100%; margin-left: 0; } }
+

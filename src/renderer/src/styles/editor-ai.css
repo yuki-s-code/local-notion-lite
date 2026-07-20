@@ -1,0 +1,47 @@
+/* Page-local and selection-local editor AI. Selection actions are integrated into BlockNote's native formatting toolbar. */
+.blocknote-ai-editor-tools {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+  margin: 0 0 10px;
+}
+.blocknote-ai-editor-tools .blocknote-ai-fab {
+  position: static;
+  z-index: auto;
+  margin: 0;
+}
+.blocknote-ai-editor-tools .blocknote-ai-fab::before { display: none; }
+.blocknote-ai-editor-tools .blocknote-ai-dock {
+  position: static;
+  z-index: auto;
+  width: min(560px, 100%);
+  max-height: min(680px, 72vh);
+  overflow: auto;
+}
+
+.blocknote-ai-selection-panel {
+  position: fixed;
+  z-index: 3601;
+  width: min(440px, calc(100vw - 24px));
+  max-height: min(540px, calc(100vh - 24px));
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid rgba(99, 102, 241, .22);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .99);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, .25);
+  backdrop-filter: blur(16px);
+}
+.blocknote-ai-selection-panel .blocknote-ai-dock-head { position: sticky; top: -12px; z-index: 1; margin: -12px -12px 10px; padding: 12px; background: rgba(255,255,255,.96); border-bottom: 1px solid rgba(15,23,42,.06); }
+.blocknote-ai-selection-panel .blocknote-ai-quick-actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.blocknote-ai-selection-panel .blocknote-ai-quick-actions button { min-width: 0; padding: 8px 6px; font-size: 11px; }
+.blocknote-ai-selection-panel .blocknote-ai-composer { margin-top: 10px; }
+.blocknote-ai-selection-panel .blocknote-ai-result { max-height: 260px; overflow: auto; }
+
+@media (max-width: 700px) {
+  .blocknote-ai-editor-tools { justify-items: stretch; }
+  .blocknote-ai-editor-tools .blocknote-ai-fab { justify-self: end; }
+  .blocknote-ai-editor-tools .blocknote-ai-dock { width: 100%; }
+  .blocknote-ai-selection-panel { width: calc(100vw - 24px); max-height: min(68vh, calc(100vh - 24px)); }
+  .blocknote-ai-selection-panel .blocknote-ai-quick-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

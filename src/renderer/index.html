@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Keep Electron/Vite development working while restricting production renderer capabilities. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:* http://127.0.0.1:*; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* http://127.0.0.1:*; style-src 'self' 'unsafe-inline' http://localhost:* http://127.0.0.1:*; img-src 'self' data: blob: http://localhost:* http://127.0.0.1:*; font-src 'self' data:; connect-src 'self' http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*; media-src 'self' blob: http://localhost:* http://127.0.0.1:*; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'" />
+    <style>
+      /* Critical startup styles: available before the renderer bundle loads. */
+      #local-notion-startup{position:fixed;inset:0;z-index:2147483000;overflow:hidden;color:#172033;background:#f7f8fb;transition:opacity .18s ease,visibility .18s ease,background .24s ease}#local-notion-startup.is-hidden{opacity:0;visibility:hidden;pointer-events:none}.local-notion-startup-skeleton{position:absolute;inset:0;display:grid;grid-template-columns:238px minmax(0,1fr);background:linear-gradient(145deg,#fbfcff,#f1f4f9)}.local-notion-startup-sidebar{display:flex;flex-direction:column;gap:14px;padding:22px 18px;border-right:1px solid rgba(37,55,85,.07);background:rgba(255,255,255,.72)}.local-notion-startup-logo{display:grid;place-items:center;width:32px;height:32px;margin:0 0 22px 2px;border-radius:10px;background:linear-gradient(135deg,#283f72,#5b77ae);color:#fff}.local-notion-startup-sidebar i{width:82%;height:10px;border-radius:99px;background:#e8edf5}.local-notion-startup-sidebar i:nth-of-type(2){width:60%}.local-notion-startup-sidebar i:nth-of-type(4){width:72%}.local-notion-startup-canvas{padding:26px clamp(28px,6vw,94px)}.local-notion-startup-toolbar{display:flex;align-items:center;gap:12px;height:42px;padding-bottom:24px;border-bottom:1px solid rgba(37,55,85,.06)}.local-notion-startup-toolbar b{width:108px;height:12px;border-radius:99px;background:#e4eaf3}.local-notion-startup-toolbar span{width:28px;height:10px;border-radius:99px;background:#edf1f6}.local-notion-startup-toolbar span:first-of-type{margin-left:auto;width:46px}.local-notion-startup-page{max-width:760px;padding-top:80px}.local-notion-startup-page em{display:block;width:52px;height:52px;border-radius:16px;background:#e5ebf4}.local-notion-startup-page strong{display:block;width:min(390px,72%);height:30px;margin-top:24px;border-radius:9px;background:#e5ebf4}.local-notion-startup-page i{display:block;width:min(620px,88%);height:12px;margin-top:22px;border-radius:99px;background:#e8edf5}.local-notion-startup-card{position:absolute;left:22px;bottom:22px;display:flex;align-items:center;gap:12px;width:min(390px,calc(100vw - 44px));padding:12px 14px;border:1px solid rgba(34,58,92,.11);border-radius:16px;background:rgba(255,255,255,.84);box-shadow:0 14px 36px rgba(30,55,88,.12);backdrop-filter:blur(14px);transition:all .24s ease}.local-notion-startup-mark{display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,#263d6c,#5d7ab4);color:#fff}.local-notion-startup-copy{min-width:0;flex:1}.local-notion-startup-eyebrow,.local-notion-startup-hint{display:none}.local-notion-startup h1{overflow:hidden;margin:0;color:#25314a;font:750 13px system-ui,sans-serif;text-overflow:ellipsis;white-space:nowrap}.local-notion-startup p{overflow:hidden;margin:2px 0 0;color:#6c7890;font:11px/1.45 system-ui,sans-serif;text-overflow:ellipsis;white-space:nowrap}.local-notion-startup-meter{width:100%;height:3px;overflow:hidden;margin-top:8px;border-radius:99px;background:#e5eaf2}.local-notion-startup-meter>span{display:block;width:38%;height:100%;border-radius:inherit;background:#5d7ab4;animation:lns 1.1s ease-in-out infinite}@keyframes lns{0%{transform:translateX(-110%)}100%{transform:translateX(370%)}}#local-notion-startup.is-delayed{background:rgba(237,242,249,.94)}#local-notion-startup.is-delayed .local-notion-startup-skeleton{filter:blur(2px);opacity:.62;transform:scale(1.012)}#local-notion-startup.is-delayed .local-notion-startup-card{left:50%;bottom:auto;top:50%;width:min(490px,calc(100vw - 44px));gap:18px;padding:30px;border-radius:24px;background:rgba(255,255,255,.92);box-shadow:0 24px 76px rgba(30,55,88,.18);transform:translate(-50%,-50%)}#local-notion-startup.is-delayed .local-notion-startup-mark{width:44px;height:44px;border-radius:14px;font-size:22px}#local-notion-startup.is-delayed .local-notion-startup-eyebrow,#local-notion-startup.is-delayed .local-notion-startup-hint{display:block}#local-notion-startup.is-delayed h1{overflow:visible;font-size:22px;white-space:normal}#local-notion-startup.is-delayed p{overflow:visible;margin-top:9px;color:#526078;font-size:14px;line-height:1.65;white-space:normal}#local-notion-startup.is-delayed .local-notion-startup-meter{height:4px;margin-top:22px}#local-notion-startup.is-delayed .local-notion-startup-hint{min-height:36px;margin-top:13px;color:#78849a;font-size:12px;line-height:1.6}#local-notion-startup.is-error .local-notion-startup-meter>span{width:100%;background:#bd4c55;animation:none}#local-notion-startup.is-error .local-notion-startup-card{border-color:rgba(189,76,85,.34)}@media(max-width:720px){.local-notion-startup-skeleton{grid-template-columns:74px minmax(0,1fr)}.local-notion-startup-sidebar{padding:18px 12px;align-items:center}.local-notion-startup-sidebar i{width:34px}.local-notion-startup-canvas{padding:22px 24px}}
+    </style>
+    <title>Local Notion Lite</title>
+  </head>
+  <body>
+    <div id="local-notion-startup" class="local-notion-startup" role="status" aria-live="polite">
+      <div class="local-notion-startup-skeleton" aria-hidden="true">
+        <aside class="local-notion-startup-sidebar">
+          <span class="local-notion-startup-logo">✦</span>
+          <i></i><i></i><i></i><i></i><i></i>
+        </aside>
+        <main class="local-notion-startup-canvas">
+          <div class="local-notion-startup-toolbar"><b></b><span></span><span></span><span></span></div>
+          <section class="local-notion-startup-page"><em></em><strong></strong><i></i><i></i><i></i><i></i><i></i></section>
+        </main>
+      </div>
+      <div class="local-notion-startup-card">
+        <div class="local-notion-startup-mark" aria-hidden="true">✦</div>
+        <div class="local-notion-startup-copy">
+          <div class="local-notion-startup-eyebrow">LOCAL NOTION LITE</div>
+          <h1 id="local-notion-startup-title">ワークスペースを準備しています</h1>
+          <p id="local-notion-startup-message">画面を起動しています。しばらくお待ちください。</p>
+          <div class="local-notion-startup-meter" aria-hidden="true"><span></span></div>
+          <p id="local-notion-startup-hint" class="local-notion-startup-hint">共有フォルダやローカルキャッシュの確認中は、初回だけ少し時間がかかることがあります。</p>
+        </div>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script>
+      (function () {
+        const screen = document.getElementById('local-notion-startup');
+        const title = document.getElementById('local-notion-startup-title');
+        const message = document.getElementById('local-notion-startup-message');
+        const hint = document.getElementById('local-notion-startup-hint');
+        const copy = {
+          renderer: ['画面を準備しています', 'アプリ画面を表示しています。'],
+          settings: ['起動設定を確認しています', '共有フォルダとローカル保存先を確認しています。'],
+          localDb: ['ローカルデータを準備しています', 'このPCの高速キャッシュを開いています。'],
+          workspace: ['共有ワークスペースを確認しています', '共有フォルダの利用準備をしています。'],
+          api: ['作業環境を準備しています', 'ページとデータベースを読み込める状態にしています。'],
+          ready: ['ローカルデータを読み込んでいます', 'まもなく操作を開始できます。'],
+          error: ['起動を完了できませんでした', '設定または共有フォルダを確認してください。']
+        };
+        function render(progress) {
+          if (!progress) return;
+          const next = copy[progress.stage] || copy.api;
+          title.textContent = progress.title || next[0];
+          message.textContent = progress.message || next[1];
+          if (progress.stage === 'error') {
+            screen.classList.add('is-error', 'is-delayed');
+            hint.textContent = progress.detail || 'アプリを終了し、共有フォルダへ接続できることを確認してから再度起動してください。';
+          } else if (progress.detail) {
+            hint.textContent = progress.detail;
+          }
+        }
+        window.addEventListener('local-notion:startup-progress', function (event) { render(event.detail); });
+        window.addEventListener('local-notion:workspace-ready', function () {
+          screen.classList.add('is-hidden');
+          window.setTimeout(function () { screen.remove(); }, 240);
+        });
+        // Most launches complete quickly.  Keep the first moment quiet, then
+        // expand only when a user would otherwise perceive a real wait.
+        window.setTimeout(function () {
+          if (!screen.classList.contains('is-hidden')) screen.classList.add('is-delayed');
+        }, 1400);
+        window.setTimeout(function () {
+          if (!screen.classList.contains('is-hidden') && !screen.classList.contains('is-error')) {
+            screen.classList.add('is-slow', 'is-delayed');
+            hint.textContent = '共有フォルダまたはローカルキャッシュの準備に時間がかかっています。アプリは安全に準備を続けています。';
+          }
+        }, 8000);
+        window.localNotion?.getStartupProgress?.().then(render).catch(function () {});
+      })();
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
